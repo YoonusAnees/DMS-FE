@@ -48,7 +48,7 @@ export default function DashboardView() {
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Dashboard Title */}
-        <h1 className="text-4xl font-bold text-gray-800 mb-10 text-center">Relief Requests Dashboard</h1>
+        <h1 className="text-4xl font-bold text-gray-800 mb-10 text-center">ASL Relief Requests Dashboard</h1>
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">

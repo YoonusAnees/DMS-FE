@@ -8,7 +8,7 @@ export default function Navbar() {
     <nav className="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <Link to="/" className="text-2xl font-bold tracking-tight hover:text-blue-100 transition">
-          DisasterAid
+          Anything Sri Lanka
         </Link>
 
         <div className="flex items-center space-x-8">
