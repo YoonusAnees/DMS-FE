@@ -13,7 +13,7 @@ export default function AdminLogin() {
     try {
       const res = await api.post("/auth/login", { username, password });
       login(res.data.token);
-      window.location.href = "/dashboard";
+      window.location.href = "/adminDasboard";
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
     }

@@ -5,16 +5,21 @@ import AdminDashboard from "./pages/AdminDashboard";
 import RequestForm from "./pages/RequestForm";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Navbar from "./components/Navbar";
+import DashboardView from "./pages/DashboardView";
+
 
 export default function App() {
   return (
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/" element={<RequestForm />} />
+                <Route path="/" element={<DashboardView />} />
+
+        <Route path="/request" element={<RequestForm />} />
+
         <Route path="/register" element={<AdminRegister />} />
         <Route path="/login" element={<AdminLogin />} />
-        <Route path="/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+        <Route path="/adminDasboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );

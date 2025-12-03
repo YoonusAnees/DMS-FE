@@ -12,13 +12,13 @@ export default function Navbar() {
         </Link>
 
         <div className="flex items-center space-x-8">
-          <Link to="/" className="hover:text-blue-100 transition font-medium">
+          <Link to="/request" className="hover:text-blue-100 transition font-medium">
             Request Goods
           </Link>
 
           {token ? (
             <>
-              <Link to="/dashboard" className="hover:text-blue-100 transition font-medium">
+              <Link to="/adminDasboard" className="hover:text-blue-100 transition font-medium">
                 Dashboard
               </Link>
               <button
@@ -29,13 +29,28 @@ export default function Navbar() {
               </button>
             </>
           ) : (
+           <>
+           
             <Link
-              to="/login"
-            //   className="bg-white text-blue-700 hover:bg-blue-50 px-6 py-2 rounded-lg font-semibold transition transform hover:scale-105"
+              to="/"
+               className="bg-white text-blue-700 hover:bg-blue-50 px-6 py-2 rounded-lg font-semibold transition transform hover:scale-105"
             >
-              {/* Admin Login */}
+               Dasboard  
             </Link>
-          )}
+
+             <Link
+              to="/login"
+               className="bg-white text-blue-700 hover:bg-blue-50 px-6 py-2 rounded-lg font-semibold transition transform hover:scale-105"
+            >
+               Login  
+            </Link>
+           
+           </>
+
+            
+          )
+          
+          }
         </div>
       </div>
     </nav>

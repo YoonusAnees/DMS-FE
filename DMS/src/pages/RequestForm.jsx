@@ -1,55 +1,92 @@
 import { useState } from "react";
-import Input from "../components/Input";
 import api from "../services/api";
+import LocationSelect from "../components/LocationSelect";
+import Input from "../components/Input";
 
 export default function RequestForm() {
   const [form, setForm] = useState({
-    name: "", contact: "", location: "", itemNeeded: "", reason: ""
+    name: "",
+    contact: "",
+    location: "",
+    itemNeeded: "",
+    reason: "",
   });
-  const [submitting, setSubmitting] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitting(true);
+    // basic validation
+    if (!form.name || !form.contact || !form.location || !form.itemNeeded) {
+      alert("Please fill in all required fields");
+      return;
+    }
+
+    setLoading(true);
     try {
       await api.post("/requests", form);
-      alert("Request submitted successfully!");
+      alert("Request submitted!");
       setForm({ name: "", contact: "", location: "", itemNeeded: "", reason: "" });
     } catch (err) {
       alert(err.response?.data?.message || "Submission failed");
     } finally {
-      setSubmitting(false);
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50 flex items-center justify-center px-4">
-      <div className="max-w-md w-full">
-        <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold text-gray-800 mb-3">Request Disaster Relief</h1>
-          <p className="text-gray-600">Fill in your details to receive help quickly</p>
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex justify-center items-center py-12">
+      <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-lg">
+        <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">Request Relief Goods</h1>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <Input
+            label="Full Name"
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            placeholder={"Your Name"}
+          />
+          <Input
+            label="Contact Number"
+            name="contact"
+            value={form.contact}
+            onChange={handleChange}
+            placeholder={"07*********"}
 
-        <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
-          <Input label="Full Name" name="name" value={form.name} onChange={handleChange} placeholder="Name" />
-          <Input label="Phone / WhatsApp" name="contact" value={form.contact} onChange={handleChange} placeholder="0761231231" />
-          <Input label="Location (City/Area)" name="location" value={form.location} onChange={handleChange} placeholder="Kandy, Akurana" />
-          <Input label="Item Needed" name="itemNeeded" value={form.itemNeeded} onChange={handleChange} placeholder="Blankets, Food Packets, Water" />
-          <Input label="Reason (Optional)" name="reason" value={form.reason} onChange={handleChange} placeholder="Flood-affected family of 5" />
+          />
+          <LocationSelect
+            name="location"
+            value={form.location}
+            onChange={handleChange}
+            placeholder="Type or select your location"
+          />
+          <Input
+            label="Item Needed"
+            name="itemNeeded"
+            value={form.itemNeeded}
+            onChange={handleChange}
+            placeholder={"Blanket,Dress....."}
+          />
+          <Input
+            label="Reason (Add Quantities)"
+            name="reason"
+            value={form.reason}
+            onChange={handleChange}
+            placeholder={"Need 5 Blackets , 5 Family Need Dress ...."}
 
+          />
           <button
             type="submit"
-            disabled={submitting}
-            className="w-full mt-6 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-xl shadow-lg transform transition hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed"
+            disabled={loading}
+            className={`w-full py-3 rounded-lg font-semibold text-white transition transform hover:scale-105 ${
+              loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
+            }`}
           >
-            {submitting ? "Submitting..." : "Submit Request"}
+            {loading ? "Submitting..." : "Submit Request"}
           </button>
-
-          <p className="text-center text-xs text-gray-500 mt-6">
-            Your request will be reviewed by our team within 24 hours.
-          </p>
         </form>
       </div>
     </div>
