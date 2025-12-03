@@ -8,11 +8,18 @@ export default function RequestCard({ request, onUpdate }) {
     rejected: "bg-red-100 text-red-800",
   };
 
+  const buttonsDisabled = status !== "pending"; // ONLY disable buttons, not card
+
   return (
     <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-6 border border-gray-100">
+      
       <div className="flex justify-between items-start mb-3">
         <h2 className="text-xl font-bold text-gray-800">{name}</h2>
-        <span className={`px-3 py-1 rounded-full text-sm font-semibold ${statusColors[status] || "bg-gray-100"}`}>
+        <span
+          className={`px-3 py-1 rounded-full text-sm font-semibold ${
+            statusColors[status] || "bg-gray-100"
+          }`}
+        >
           {status.toUpperCase()}
         </span>
       </div>
@@ -29,9 +36,10 @@ export default function RequestCard({ request, onUpdate }) {
           <button
             key={s}
             onClick={() => onUpdate(_id, s)}
-            disabled={status === s}
-            className={`px-4 py-2 rounded-lg font-medium transition transform hover:scale-105 ${
-              status === s
+            disabled={buttonsDisabled}
+            className={`px-4 py-2 rounded-lg font-medium transition transform 
+            ${
+              buttonsDisabled
                 ? "bg-gray-400 text-white cursor-not-allowed"
                 : s === "sent"
                 ? "bg-green-600 hover:bg-green-700 text-white"
