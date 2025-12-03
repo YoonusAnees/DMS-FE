@@ -8,7 +8,7 @@ export default function RequestCard({ request, onUpdate }) {
     rejected: "bg-red-100 text-red-800",
   };
 
-  const buttonsDisabled = status !== "pending"; // ONLY disable buttons, not card
+  const buttonsDisabled = status !== "pending";
 
   return (
     <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-6 border border-gray-100">

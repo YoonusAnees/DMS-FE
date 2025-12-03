@@ -57,7 +57,10 @@ export default function RequestForm() {
             placeholder={"07*********"}
 
           />
+
+          <span className="font-bold">Location</span>
           <LocationSelect
+            label="Location"
             name="location"
             value={form.location}
             onChange={handleChange}
@@ -81,9 +84,8 @@ export default function RequestForm() {
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-3 rounded-lg font-semibold text-white transition transform hover:scale-105 ${
-              loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
-            }`}
+            className={`w-full py-3 rounded-lg font-semibold text-white transition transform hover:scale-105 ${loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
+              }`}
           >
             {loading ? "Submitting..." : "Submit Request"}
           </button>

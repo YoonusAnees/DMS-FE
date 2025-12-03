@@ -6,7 +6,6 @@ export default function LocationSelect({ value, onChange, name = "location", pla
   const [filtered, setFiltered] = useState(locations.map(l => l.name_en));
 
   useEffect(() => {
-    // initialize filtered list
     setFiltered(locations.map(l => l.name_en));
   }, []);
 
@@ -28,9 +27,8 @@ export default function LocationSelect({ value, onChange, name = "location", pla
   };
 
   const handleSelect = (o) => {
-    setSearch(o);
+    setSearch(""); // HIDE DROPDOWN
     onChange({ target: { name, value: o } });
-    setFiltered(locations.map(l => l.name_en)); // reset after select if you want
   };
 
   return (
@@ -45,6 +43,7 @@ export default function LocationSelect({ value, onChange, name = "location", pla
         className="w-full p-3 border rounded-lg bg-white border-gray-300
           focus:border-blue-600 focus:ring-2 focus:ring-blue-300 outline-none"
       />
+
       {search && filtered.length > 0 && (
         <ul className="absolute z-10 w-full max-h-60 overflow-y-auto bg-white border border-gray-200 rounded-md mt-1 shadow-lg">
           {filtered.map((o) => (
