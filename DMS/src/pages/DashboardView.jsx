@@ -5,7 +5,7 @@ export default function DashboardView() {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
 
- 
+
 
   const fetchRequests = async () => {
     setLoading(true);
@@ -24,13 +24,13 @@ export default function DashboardView() {
   }, []);
 
 
-const maskName = (name) => {
-  if (!name) return "";
-  if (name.length === 1) return name;
-  return name[0] + "*".repeat(name.length - 1);
-};
+  const maskName = (name) => {
+    if (!name) return "";
+    if (name.length === 1) return name;
+    return name[0] + "*".repeat(name.length - 1);
+  };
 
- 
+
 
   // Stats calculation
   const stats = {
@@ -69,7 +69,7 @@ const maskName = (name) => {
           ))}
         </div>
 
-      
+
 
         {/* Requests List */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -86,20 +86,21 @@ const maskName = (name) => {
                 className="bg-white rounded-2xl shadow-lg p-6 flex justify-between items-center"
               >
                 <div>
-<p className="font-medium text-gray-800">{maskName(req.name)}</p>
+                  <p className="font-medium text-gray-800">{maskName(req.name)}</p>
                   <p className="text-sm text-gray-600">{req.itemNeeded}</p>
                   {req.reason && <p className="text-xs text-gray-400">{req.reason}</p>}
+                  {req.reason && <p className="text-xs text-gray-400 font-bold">{req.location}</p>}
+
                 </div>
                 <span
-                  className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                    req.status === "pending"
+                  className={`px-3 py-1 rounded-full text-sm font-semibold ${req.status === "pending"
                       ? "bg-yellow-100 text-yellow-800"
                       : req.status === "sent"
-                      ? "bg-green-100 text-green-800"
-                      : req.status === "completed"
-                      ? "bg-blue-100 text-blue-800"
-                      : "bg-red-100 text-red-800"
-                  }`}
+                        ? "bg-green-100 text-green-800"
+                        : req.status === "completed"
+                          ? "bg-blue-100 text-blue-800"
+                          : "bg-red-100 text-red-800"
+                    }`}
                 >
                   {req.status.charAt(0).toUpperCase() + req.status.slice(1)}
                 </span>
