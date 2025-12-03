@@ -24,6 +24,12 @@ export default function DashboardView() {
   }, []);
 
 
+const maskName = (name) => {
+  if (!name) return "";
+  if (name.length === 1) return name;
+  return name[0] + "*".repeat(name.length - 1);
+};
+
  
 
   // Stats calculation
@@ -80,7 +86,7 @@ export default function DashboardView() {
                 className="bg-white rounded-2xl shadow-lg p-6 flex justify-between items-center"
               >
                 <div>
-                  <p className="font-medium text-gray-800">{req.name}</p>
+<p className="font-medium text-gray-800">{maskName(req.name)}</p>
                   <p className="text-sm text-gray-600">{req.itemNeeded}</p>
                   {req.reason && <p className="text-xs text-gray-400">{req.reason}</p>}
                 </div>
