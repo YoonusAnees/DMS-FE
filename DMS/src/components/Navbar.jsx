@@ -8,10 +8,9 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg sticky top-0 z-50">
+    <nav className="bg-linear-to-r from-blue-600 to-blue-800 text-white shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
-        {/* Brand */}
         <Link
           to="/"
           className="text-2xl font-bold tracking-tight hover:text-blue-100 transition"
@@ -19,11 +18,10 @@ export default function Navbar() {
           Anything Sri Lanka
         </Link>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden md:flex items-center space-x-4">
           <Link
             to="/request"
-            className="hover:text-blue-100 transition font-medium"
+                className="bg-white text-blue-700 hover:bg-blue-50 px-6 py-2 rounded-lg font-semibold transition transform hover:scale-105"
           >
             Request Goods
           </Link>
